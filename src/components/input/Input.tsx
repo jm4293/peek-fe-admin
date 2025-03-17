@@ -55,7 +55,7 @@ export const Input = (props: IProps) => {
       <input
         ref={ref}
         name={name}
-        className={`w-full placeholder:text-[#B5B5B5] placeholder:font-normal py-3 px-4 ${isConfirm ? 'pr-10' : ''} ${border_color()}  ${className}`}
+        className={`w-full placeholder:font-normal py-3 px-4 ${isConfirm ? 'pr-10' : ''} ${border_color()}  ${className}`}
         type={type}
         value={value}
         onChange={onChange}
