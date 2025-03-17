@@ -16,8 +16,8 @@ export const Login = () => {
   };
 
   return (
-    <>
-      <div className="w-full flex flex-col mb-16">
+    <div className="absolute w-1/3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="w-full flex flex-col gap-10">
         <Input
           type="email"
           title="이메일"
@@ -33,11 +33,8 @@ export const Login = () => {
           onKeyDown={(event) => {}}
           placeholder="비밀번호"
         />
-      </div>
-
-      <div className="mb-7">
         <Button text="로그인" onClick={(event) => onLoginHandler(event)} />
       </div>
-    </>
+    </div>
   );
 };

@@ -9,7 +9,9 @@ export const useAuthMutation = () => {
 
   const onLoginMutation = useMutation({
     mutationFn: (dto: ILoginDto) => AuthApi.postLogin(dto),
-    onSuccess: (res) => {},
+    onSuccess: (res) => {
+      navigate('/user');
+    },
   });
 
   return {

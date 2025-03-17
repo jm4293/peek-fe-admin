@@ -1,34 +1,34 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { ResConfig } from "@/types/res.config";
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { ResConfig } from '@/types/res.config';
 
 interface IGetReq<D> {
   url: string;
   params?: D;
-  headers?: AxiosRequestConfig["headers"];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 interface IPostReq<D> {
   url: string;
   data: D;
-  headers?: AxiosRequestConfig["headers"];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 interface IPutReq<D> {
   url: string;
   data: D;
-  headers?: AxiosRequestConfig["headers"];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 interface IDeleteReq<D> {
   url: string;
   data?: D;
-  headers?: AxiosRequestConfig["headers"];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 interface IPatchReq<D> {
   url: string;
   data: D;
-  headers?: AxiosRequestConfig["headers"];
+  headers?: AxiosRequestConfig['headers'];
 }
 
 export class AxiosConfig {
@@ -37,7 +37,7 @@ export class AxiosConfig {
   constructor() {
     this._axiosInstance = axios.create({
       baseURL: `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/${import.meta.env.VITE_API_PREFIX}`,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
 
@@ -57,6 +57,11 @@ export class AxiosConfig {
       async (error) => {
         if (error.response?.status === 302) {
         } else if (error.response?.status === 400) {
+          const { message } = error.response.data;
+
+          if (message) {
+            alert(message);
+          }
         } else if (error.response?.status === 401) {
         } else if (error.response?.status === 403) {
         }
