@@ -34,11 +34,47 @@ button {
   position: relative;
 }
 
+.layout > .header-container {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.layout > .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+  z-index: 10;
+}
+
+.sidebar {
+  width: 14rem;
+  height: 100%;
+  background-color: beige;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0 1.5rem;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
 .layout > .outlet {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #f0f0f0;
   padding: 0.2rem 0;
+  height: 100%;
   z-index: 20;
 }
 
