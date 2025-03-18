@@ -1,11 +1,11 @@
 import { AxiosConfig } from '@/common/axios-config';
-import { IUserList } from '@/types/res/user';
+import { IUserList } from '@/types/res';
 
 class UserApi extends AxiosConfig {
   private readonly _baseURL = '/user';
 
   async getUserList(pageParam: number) {
-    return await this.get<IUserList, {}>({ url: `${this._baseURL}?pageParam=${pageParam}` });
+    return await this.get<IUserList, null>({ url: `${this._baseURL}?pageParam=${pageParam}` });
   }
 }
 
