@@ -4,6 +4,7 @@ import { Layout } from '@/common/layout';
 import { NotFound } from '@/components/not-found';
 import { UserList } from '@/pages/user';
 import { BoardList } from '@/pages/board';
+import { Stock } from '@/pages/stock';
 
 export const Router = () => {
   // const _BASE_URL = process.env.PUBLIC_URL;
@@ -17,6 +18,7 @@ export const Router = () => {
         <Route element={<Layout />}>
           <Route path="/user" element={<UserList />} />
           <Route path="/board" element={<BoardList />} />
+          <Route path="/stock" element={<Stock />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

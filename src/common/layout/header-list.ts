@@ -20,4 +20,12 @@ const board = [
   },
 ];
 
-export const headerList = [...user, ...board];
+const stock = [
+  {
+    name: '주식',
+    url: '/stock',
+    children: null,
+  },
+];
+
+export const headerList = [...user, ...board, ...stock];

@@ -15,6 +15,7 @@ export const HeaderMobile = () => {
     event.stopPropagation();
 
     navigate(url);
+    setOpen(false);
   };
 
   useEffect(() => {
