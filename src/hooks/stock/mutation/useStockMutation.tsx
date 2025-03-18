@@ -3,7 +3,7 @@ import StockApi from '@/api-url/stock/stock.api';
 
 export const useStockMutation = () => {
   const onUploadFileMutation = useMutation({
-    mutationFn: (dto: FormData) => StockApi.uploadFile(dto),
+    mutationFn: (dto: { formData: FormData; dataType: string }) => StockApi.uploadFile(dto),
     onSuccess: () => {
       console.log('File uploaded successfully');
     },
