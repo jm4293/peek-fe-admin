@@ -16,7 +16,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="absolute w-1/3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute w-1/3 min-w-[320px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div className="w-full flex flex-col gap-10">
         <Input
           type="email"
