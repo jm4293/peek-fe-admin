@@ -1,4 +1,4 @@
-import { AxiosConfig } from '@/common/axios-config';
+import { AxiosConfig } from 'common/axios';
 
 class StockApi extends AxiosConfig {
   private readonly _baseURL = '/stock';

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import UserApi from '@/api-url/user/user.api';
+import UserApi from '@/api/user/user.api';
 
 interface IProps {
   pageParam: number;

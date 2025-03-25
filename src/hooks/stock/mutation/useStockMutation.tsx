@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import StockApi from '@/api-url/stock/stock.api';
+import StockApi from '@/api/stock/stock.api';
 
 export const useStockMutation = () => {
   const onUploadFileMutation = useMutation({

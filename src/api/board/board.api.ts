@@ -1,4 +1,4 @@
-import { AxiosConfig } from '@/common/axios-config';
+import { AxiosConfig } from 'common/axios';
 import { IBoardDetailRes, IBoardListRes } from '@/types/res';
 
 class BoardApi extends AxiosConfig {

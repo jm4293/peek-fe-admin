@@ -1,4 +1,4 @@
-import { AxiosConfig } from '@/common/axios-config';
+import { AxiosConfig } from 'common/axios';
 import { IUserList } from '@/types/res';
 
 class UserApi extends AxiosConfig {

@@ -1,4 +1,4 @@
-import { AxiosConfig } from '@/common/axios-config';
+import { AxiosConfig } from 'common/axios';
 import { ILoginRes } from '@/types/res';
 import { ILoginDto } from '@/types/dto/auth';
 
