@@ -56,14 +56,20 @@ export class AxiosConfig {
       },
       async (error) => {
         if (error.response?.status === 302) {
-        } else if (error.response?.status === 400) {
-          const { message } = error.response.data;
+        }
 
-          if (message) {
-            alert(message);
-          }
-        } else if (error.response?.status === 401) {
-        } else if (error.response?.status === 403) {
+        if (error.response?.status === 400) {
+          // const { message } = error.response.data;
+          //
+          // if (message) {
+          //   alert(message);
+          // }
+        }
+
+        if (error.response?.status === 401) {
+        }
+
+        if (error.response?.status === 403) {
         }
 
         return Promise.reject(error);
