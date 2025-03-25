@@ -1,69 +1,64 @@
-import { useDeviceLayout } from '@/hooks/useDeviceLayout';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { Text } from '@/components/text';
 
 interface IProps {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  title: string;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   placeholder?: string;
   disabled?: boolean;
-  borderColor?: 'gray' | 'green';
+  color?: 'gray' | 'green';
   optional?: boolean;
   className?: string;
-  children?: React.ReactNode;
+  required?: boolean;
 }
 
-export const Textarea = (props: IProps) => {
+const borderColor = {
+  gray: 'border border-gray-300',
+  green: 'border border-green-400',
+};
+
+export function Textarea(props: IProps) {
   const {
+    title,
     value,
+    defaultValue,
     onChange,
-    name,
+    name = '',
     placeholder = '',
-    disabled,
-    borderColor,
+    disabled = false,
+    color = 'gray',
     optional = false,
     className,
-    children,
+    required = false,
   } = props;
 
-  const { isMobile } = useDeviceLayout();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const border_color = () => {
-    switch (borderColor) {
-      case 'gray':
-        return 'border border-gray-300';
-      case 'green':
-        return 'border border-green-400';
-      default:
-        return 'border border-gray-300';
-    }
-  };
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-    onChange(event);
+
+    onChange && onChange(event);
   };
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = '20vh';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  }, [value]);
-
   return (
-    <textarea
-      ref={textareaRef}
-      name={name}
-      className={`${isMobile ? 'py-2 px-4' : 'py-3 px-5'} ${border_color()} ${className} w-full max-h-[60vh] rounded-2xl resize-none`}
-      value={value}
-      onChange={handleInput}
-      placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}
-      disabled={disabled}
-    />
+    <div className="flex flex-col gap-3">
+      <Text value={title} color="#000000" />
+      <textarea
+        ref={textareaRef}
+        name={name}
+        className={`min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
+        value={value}
+        defaultValue={defaultValue}
+        onChange={handleInput}
+        placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}
+        disabled={disabled}
+        required={required}
+      />
+    </div>
   );
-};
+}

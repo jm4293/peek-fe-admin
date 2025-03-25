@@ -7,7 +7,7 @@ export const Stock = () => {
 
   const { onUploadFileMutation } = useStockMutation();
 
-  const onFileChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+  const fileChangeHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
       const formData = new FormData();
@@ -19,7 +19,7 @@ export const Stock = () => {
     }
   };
 
-  const onClickHandler = (params: { event: React.MouseEvent<HTMLButtonElement, MouseEvent>; dataType: string }) => {
+  const clickHandler = (params: { event: React.MouseEvent<HTMLButtonElement, MouseEvent>; dataType: string }) => {
     const { event, dataType } = params;
     event.stopPropagation();
 
@@ -32,10 +32,10 @@ export const Stock = () => {
 
   return (
     <>
-      <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={onFileChangeHandler} accept=".xlsx" />
+      <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={fileChangeHandler} accept=".xlsx" />
       <div className="flex flex-col gap-10">
-        <button onClick={(event) => onClickHandler({ event, dataType: 'kospi' })}>코스피</button>
-        <button onClick={(event) => onClickHandler({ event, dataType: 'kosdaq' })}>코스닥</button>
+        <button onClick={(event) => clickHandler({ event, dataType: 'kospi' })}>코스피</button>
+        <button onClick={(event) => clickHandler({ event, dataType: 'kosdaq' })}>코스닥</button>
       </div>
     </>
   );

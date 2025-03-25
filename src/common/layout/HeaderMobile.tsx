@@ -9,7 +9,7 @@ export const HeaderMobile = () => {
   const [open, setOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  const onClickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; url: string }) => {
+  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; url: string }) => {
     const { event, url } = params;
 
     event.stopPropagation();
@@ -44,7 +44,7 @@ export const HeaderMobile = () => {
         <div>
           {headerList.map((el) => {
             return (
-              <div className="mb-6 cursor-pointer" onClick={(event) => onClickHandler({ event, url: el.url })}>
+              <div className="mb-6 cursor-pointer" onClick={(event) => clickHandler({ event, url: el.url })}>
                 {el.name}
               </div>
             );

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export const HeaderDesktop = () => {
   const navigate = useNavigate();
 
-  const onClickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; url: string }) => {
+  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; url: string }) => {
     const { event, url } = params;
 
     event.stopPropagation();
@@ -21,7 +21,7 @@ export const HeaderDesktop = () => {
       <div className="flex">
         {headerList.map((el) => {
           return (
-            <div className="mr-6 cursor-pointer" onClick={(event) => onClickHandler({ event, url: el.url })}>
+            <div className="mr-6 cursor-pointer" onClick={(event) => clickHandler({ event, url: el.url })}>
               {el.name}
             </div>
           );

@@ -1,11 +1,10 @@
 interface IProps {
   value: string;
-  color: '#000000' | '#282828' | '#444444' | '#666666';
-  id?: string;
+  color: '#000000' | '#282828' | '#444444' | '#666666' | '#F87171';
   size?: 'sm' | 'base' | 'lg' | 'xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
-  onClick?: (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => void;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -14,6 +13,7 @@ const textColor = {
   '#282828': 'text-[#282828]',
   '#444444': 'text-[#444444]',
   '#666666': 'text-[#666666]',
+  '#F87171': 'text-[#f87171]',
 };
 
 const fontSize = {
@@ -34,16 +34,23 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export const Text = (props: IProps) => {
-  const { value, id, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
+export  function Text(props: IProps) {
+  const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
+
+  const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <p
       className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${className}`}
-      id={id}
-      onClick={(event) => onClick && onClick(event)}
+      onClick={(event) => clickHandler(event)}
       style={{ wordBreak: 'break-word' }}>
       {value}
     </p>
   );
-};
+}

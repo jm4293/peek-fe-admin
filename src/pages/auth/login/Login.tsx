@@ -1,7 +1,7 @@
-import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { useState } from 'react';
 import { useAuthMutation } from '@/hooks/auth';
+import { Input } from '@/components/input';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,8 +9,15 @@ export const Login = () => {
 
   const { onLoginMutation } = useAuthMutation();
 
-  const onLoginHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.stopPropagation();
+  const keyDownHandler = () => {
+    loginHandler();
+  };
+
+  const loginHandler = () => {
+    if (!email || !password) {
+      alert('이메일과 비밀번호를 입력해주세요.');
+      return;
+    }
 
     onLoginMutation.mutate({ email, password });
   };
@@ -21,6 +28,7 @@ export const Login = () => {
         <Input
           type="email"
           title="이메일"
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="이메일 주소"
@@ -28,12 +36,13 @@ export const Login = () => {
         <Input
           type="password"
           title="비밀번호"
+          name="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          onKeyDown={(event) => {}}
+          onKeyDown={keyDownHandler}
           placeholder="비밀번호"
         />
-        <Button text="로그인" onClick={(event) => onLoginHandler(event)} />
+        <Button text="로그인" onClick={loginHandler} />
       </div>
     </div>
   );

@@ -1,68 +1,68 @@
-import { useDeviceLayout } from '@/hooks/useDeviceLayout';
 import { Text } from '@/components/text';
 
 interface IProps {
   type: 'text' | 'email' | 'password' | 'date' | 'datetime-local';
   title: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  placeholder?: string;
-  disabled?: boolean;
+  name: string;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   borderColor?: 'gray' | 'green';
   optional?: boolean;
-  ref?: React.RefObject<HTMLInputElement>;
   className?: string;
-  isConfirm?: boolean;
-  onClick?: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  required?: boolean;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export const Input = (props: IProps) => {
+const border_color = {
+  gray: 'border border-gray-300',
+  green: 'border border-green-400',
+};
+
+export function Input(props: IProps) {
   const {
     type,
     title,
-    value,
-    onChange,
     name,
-    placeholder = '',
-    disabled,
-    borderColor,
+    value,
+    defaultValue,
+    onChange,
+    borderColor = 'gray',
     optional = false,
-    ref,
     className,
-    isConfirm,
-    onClick,
+    placeholder,
+    disabled = false,
+    required = false,
     onKeyDown,
   } = props;
 
-  const { isMobile } = useDeviceLayout();
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    event.stopPropagation();
 
-  const border_color = () => {
-    switch (borderColor) {
-      case 'gray':
-        return 'border border-gray-300';
-      case 'green':
-        return 'border border-green-400';
-      default:
-        return 'border border-gray-300';
+    if (onKeyDown) {
+      if (event.key === 'Enter') {
+        onKeyDown(event);
+      }
     }
   };
 
   return (
-    <div className="relative flex flex-col gap-3">
+    <div className="flex flex-col gap-3">
       <Text value={title} color="#000000" />
       <input
-        ref={ref}
+        className={`${border_color[borderColor]} ${className}`}
         name={name}
-        className={`w-full placeholder:font-normal py-3 px-4 ${isConfirm ? 'pr-10' : ''} ${border_color()}  ${className}`}
         type={type}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}
+        placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
         disabled={disabled}
+        required={required}
+        onKeyDown={keyDownHandler}
       />
     </div>
   );
-};
+}
