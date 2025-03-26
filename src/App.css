@@ -48,7 +48,9 @@ button {
 
 .header-desktop {
   width: 100%;
-  display: flex;
+  /*display: flex;*/
+  display: grid;
+  grid-template-columns: 1fr 5fr;
   align-items: center;
   padding: 1rem 1.5rem;
   z-index: 10;

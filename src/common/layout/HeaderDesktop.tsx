@@ -1,15 +1,15 @@
 import { headerList } from '@/common/layout/header-list';
 import { useNavigate } from 'react-router-dom';
+import { Text } from '@/components/text';
+import { useAuthMutation } from '@/hooks/auth';
 
 export const HeaderDesktop = () => {
   const navigate = useNavigate();
 
-  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; url: string }) => {
-    const { event, url } = params;
+  const { logoutMutation } = useAuthMutation();
 
-    event.stopPropagation();
-
-    navigate(url);
+  const logoutHandler = () => {
+    logoutMutation.mutate();
   };
 
   return (
@@ -18,14 +18,20 @@ export const HeaderDesktop = () => {
         <p>로고</p>
       </div>
 
-      <div className="flex">
-        {headerList.map((el) => {
-          return (
-            <div className="mr-6 cursor-pointer" onClick={(event) => clickHandler({ event, url: el.url })}>
-              {el.name}
-            </div>
-          );
-        })}
+      <div className="w-full flex justify-center items-center">
+        {/*{headerList.map((el) => {*/}
+        {/*  return (*/}
+        {/*    <div className="mr-6 cursor-pointer" onClick={(event) => clickHandler({ event, url: el.url })}>*/}
+        {/*      {el.name}*/}
+        {/*    </div>*/}
+        {/*  );*/}
+        {/*})}*/}
+        <div className="w-full flex justify-start">
+          {headerList.map((el) => {
+            return <Text value={el.name} color="#000000" className="mr-6" onClick={() => navigate(el.url)} />;
+          })}
+        </div>
+        <Text value="로그아웃" color="#F87171" className="whitespace-nowrap" onClick={logoutHandler} />
       </div>
     </div>
   );

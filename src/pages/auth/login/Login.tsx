@@ -9,7 +9,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [errorMessages, setErrorMessages] = useState<string | null>(null);
 
-  const { onLoginMutation } = useAuthMutation();
+  const { loginMutation } = useAuthMutation();
 
   const keyDownHandler = () => {
     loginHandler();
@@ -21,16 +21,7 @@ export const Login = () => {
       return;
     }
 
-    onLoginMutation.mutate(
-      { email, password },
-      {
-        onError: (error: any) => {
-          const { message } = error.response.data;
-
-          setErrorMessages(message);
-        },
-      },
-    );
+    loginMutation.mutate({ email, password });
   };
 
   return (
