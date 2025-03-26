@@ -1,5 +1,7 @@
 import { ChangeEvent, useRef } from 'react';
 import { useStockMutation } from '@/hooks/stock';
+import { Button } from '@/components/button';
+import { Table } from '@/components/table';
 
 export const Stock = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -19,9 +21,8 @@ export const Stock = () => {
     }
   };
 
-  const clickHandler = (params: { event: React.MouseEvent<HTMLButtonElement, MouseEvent>; dataType: string }) => {
-    const { event, dataType } = params;
-    event.stopPropagation();
+  const clickHandler = (params: { dataType: string }) => {
+    const { dataType } = params;
 
     if (inputRef.current) {
       dataTypeRef.current = dataType;
@@ -31,12 +32,14 @@ export const Stock = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-10">
       <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={fileChangeHandler} accept=".xlsx" />
-      <div className="flex flex-col gap-10">
-        <button onClick={(event) => clickHandler({ event, dataType: 'kospi' })}>코스피</button>
-        <button onClick={(event) => clickHandler({ event, dataType: 'kosdaq' })}>코스닥</button>
+      <div className="flex gap-10">
+        <Button title="코스피" color="gray" onClick={() => clickHandler({ dataType: 'kospi' })} />
+        <Button title="코스닥" color="gray" onClick={() => clickHandler({ dataType: 'kosdaq' })} />
       </div>
-    </>
+
+      <Table rowCount={100} columnCount={5} />
+    </div>
   );
 };

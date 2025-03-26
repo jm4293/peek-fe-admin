@@ -25,6 +25,46 @@ button {
   border-radius: 0.5rem
 }
 
+table {
+  /*width: 100%;*/
+  /*border-collapse: collapse;*/
+  /*table-layout: fixed;*/
+  /*max-height: 100px;*/
+  /*overflow-y: auto;*/
+}
+
+thead, tbody {
+  /*width: 100%;*/
+  display: block;
+}
+
+thead {
+  /*width: calc(100% - 1em);*/
+  /*width: 100%;*/
+}
+
+tbody {
+  /*width: 100%;*/
+  overflow-y: auto;
+  max-height: 200px; /* 원하는 높이로 설정 */
+}
+
+tr {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+th {
+  padding: 0.5rem;
+  border: 2px solid #ddd;
+}
+
+td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
 *::-webkit-scrollbar{
   display: none;
 }

@@ -1,24 +1,38 @@
-import { useDeviceLayout } from '@/hooks/useDeviceLayout';
-
 interface IProps {
+  title: string;
+  color?: 'base' | 'delete' | 'gray';
+  type?: 'submit' | 'button';
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   className?: string;
-  text: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
 }
 
-export const Button = (props: IProps) => {
-  const { className, text, onClick, disabled } = props;
+const buttonColor = {
+  base: 'bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3]',
+  delete: 'bg-[#FF6666] hover:bg-[#FF9999] disabled:bg-[#FFCCCC]',
+  gray: 'bg-[#D1D5DB] hover:bg-[#E5E7EB] disabled:bg-[#F1F5F9] text-black',
+};
 
-  const { isMobile } = useDeviceLayout();
+export const Button = (props: IProps) => {
+  const { title, color = 'base', type = 'button', onClick, className, disabled } = props;
+
+  const clickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (onClick) {
+      onClick(event);
+    }
+  };
 
   return (
     <button
-      className={`w-full bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] ${isMobile ? 'py-4' : 'py-5'} ${className}`}
-      name={text}
-      onClick={(event) => onClick(event)}
+      className={`w-full py-4 ${buttonColor[color]} ${className}`}
+      type={type}
+      onClick={clickHandler}
       disabled={disabled}>
-      <p className="text-white text-base font-normal whitespace-nowrap">{text}</p>
+      <p className={`text-base font-normal whitespace-nowrap ${color === 'gray' ? 'text-black' : 'text-white'}`}>
+        {title}
+      </p>
     </button>
   );
 };

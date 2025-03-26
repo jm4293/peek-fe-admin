@@ -34,7 +34,7 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export  function Text(props: IProps) {
+export const Text = (props: IProps) => {
   const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
 
   const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
@@ -53,4 +53,4 @@ export  function Text(props: IProps) {
       {value}
     </p>
   );
-}
+};

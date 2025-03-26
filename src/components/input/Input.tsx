@@ -21,7 +21,7 @@ const border_color = {
   green: 'border border-green-400',
 };
 
-export function Input(props: IProps) {
+export const Input = (props: IProps) => {
   const {
     type,
     title,
@@ -65,4 +65,4 @@ export function Input(props: IProps) {
       />
     </div>
   );
-}
+};

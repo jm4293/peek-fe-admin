@@ -20,7 +20,7 @@ const borderColor = {
   green: 'border border-green-400',
 };
 
-export function Textarea(props: IProps) {
+export const Textarea = (props: IProps) => {
   const {
     title,
     value,
@@ -61,4 +61,4 @@ export function Textarea(props: IProps) {
       />
     </div>
   );
-}
+};
