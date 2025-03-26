@@ -40,6 +40,8 @@ export const HeaderMobile = () => {
     <div>
       <div onClick={() => setOpen(true)}>{!open && <FaBars className="cursor-pointer" />}</div>
 
+      {open && <div className="header-mobile-overlay" onClick={() => setOpen(false)}></div>}
+
       <div ref={sidebarRef} className={`header-mobile ${open ? 'active' : ''}`}>
         <div className="h-16 flex items-center">
           <FaTimes className="cursor-pointer" onClick={() => setOpen(false)} />
