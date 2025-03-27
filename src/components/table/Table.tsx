@@ -40,7 +40,11 @@ export function Table<T extends { [key: string]: any }>(props: IProps<T>) {
             dataList?.map((data: T, rowIndex) => (
               <tr key={`table-tbody-row-${rowIndex}`} onClick={(event) => clickHandler({ event, data })}>
                 {columnList.map((_, columnIndex) => (
-                  <td key={`table-tbody-column-${columnIndex}`}>{data[columnList[columnIndex].key]}</td>
+                  <td key={`table-tbody-column-${columnIndex}`}>
+                    <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+                      {data[columnList[columnIndex].key]}
+                    </p>
+                  </td>
                 ))}
               </tr>
             ))
