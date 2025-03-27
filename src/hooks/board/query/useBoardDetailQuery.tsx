@@ -5,7 +5,7 @@ interface IProps {
   boardSeq: number;
 }
 
-export const useBoardDetail = (props: IProps) => {
+export const useBoardDetailQuery = (props: IProps) => {
   const { boardSeq } = props;
 
   return useQuery({

@@ -5,7 +5,7 @@ interface IProps {
   pageParam: number;
 }
 
-export const useBoardList = (props: IProps) => {
+export const useBoardListQuery = (props: IProps) => {
   const { pageParam } = props;
 
   return useQuery({

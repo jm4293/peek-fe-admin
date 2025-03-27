@@ -1,2 +1,2 @@
-export * from './useBoardDetail';
-export * from './useBoardList';
+export * from './useBoardDetailQuery';
+export * from './useBoardListQuery';

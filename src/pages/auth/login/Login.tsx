@@ -48,7 +48,7 @@ export const Login = () => {
 
           {errorMessages && <Text value={errorMessages} color="#F87171" />}
         </div>
-        <Button text="로그인" onClick={loginHandler} />
+        <Button title="로그인" onClick={loginHandler} />
       </div>
     </div>
   );
