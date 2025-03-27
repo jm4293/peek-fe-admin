@@ -1,33 +1,42 @@
-interface IProps {
-  rowCount: number;
-  columnCount: number;
+import { ITable } from '@/types/interface/table';
+import { Dispatch, SetStateAction } from 'react';
+import { Pagination } from '@/components/table/Pagination';
+
+interface IProps<T> {
+  dataList: T[] | undefined;
+  columnList: ITable[];
+  total: number | undefined;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
-export const Table = (props: IProps) => {
-  const { rowCount, columnCount } = props;
+export function Table<T extends { [key: string]: any }>(props: IProps<T>) {
+  const { dataList, columnList, total, page, setPage } = props;
 
   return (
-    <table>
-      <thead>
-        <tr>
-          {Array.from({ length: columnCount }, (_, index) => (
-            <th key={`table-thead-${index}`}>
-              <p className="w-full">Header {index + 1}</p>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {Array.from({ length: rowCount }, (_, rowIndex) => (
-          <tr key={`table-tbody-row-${rowIndex}`}>
-            {Array.from({ length: columnCount }, (_, columnIndex) => (
-              <td key={`table-tbody-column-${columnIndex}`}>
-                Row {rowIndex + 1}, Cell {columnIndex + 1}
-              </td>
+    <>
+      <table>
+        <thead>
+          <tr>
+            {columnList.map((column, index) => (
+              <th key={`table-thead-${index}`}>
+                <p className="w-full">{column.title}</p>
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {dataList?.map((data: T, rowIndex) => (
+            <tr key={`table-tbody-row-${rowIndex}`}>
+              {columnList.map((_, columnIndex) => (
+                <td key={`table-tbody-column-${columnIndex}`}>{data[columnList[columnIndex].key]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <Pagination total={total} page={page} setPage={setPage} />
+    </>
   );
-};
+}

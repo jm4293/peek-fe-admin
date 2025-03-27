@@ -50,7 +50,7 @@ thead {
 tbody {
   /*width: 100%;*/
   overflow-y: auto;
-  max-height: 200px; /* 원하는 높이로 설정 */
+  max-height: 60vh;
 }
 
 tr {
