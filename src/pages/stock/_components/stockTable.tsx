@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { PAGINATION_COUNT } from '@/constant/pagination';
 import { ITable } from '@/types/interface/table';
 import { IStock } from '@/types/model';
+import { useNavigate } from 'react-router-dom';
 
 const columnList: ITable[] = [
   { key: 'marketType', title: '타입' },
@@ -16,9 +17,15 @@ const columnList: ITable[] = [
 ];
 
 export const StockTable = () => {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(1);
 
   const stockListQuery = useStockListQuery({ page, count: PAGINATION_COUNT });
+
+  const clickHandler = (data: IStock) => {
+    navigate({ pathname: '/stock/detail', search: `?code=${data.code}` });
+  };
 
   return (
     <Table<IStock>
@@ -27,6 +34,7 @@ export const StockTable = () => {
       total={stockListQuery.data?.total}
       page={page}
       setPage={setPage}
+      onClick={clickHandler}
     />
   );
 };

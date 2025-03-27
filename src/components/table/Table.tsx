@@ -8,10 +8,20 @@ interface IProps<T> {
   total: number | undefined;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  onClick?: (data: T) => void;
 }
 
 export function Table<T extends { [key: string]: any }>(props: IProps<T>) {
-  const { dataList, columnList, total, page, setPage } = props;
+  const { dataList, columnList, total = 0, page, setPage, onClick } = props;
+
+  const clickHandler = (params: { event: React.MouseEvent<HTMLTableRowElement, MouseEvent>; data: T }) => {
+    const { event, data } = params;
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    onClick && onClick(data);
+  };
 
   return (
     <>
@@ -26,17 +36,25 @@ export function Table<T extends { [key: string]: any }>(props: IProps<T>) {
           </tr>
         </thead>
         <tbody>
-          {dataList?.map((data: T, rowIndex) => (
-            <tr key={`table-tbody-row-${rowIndex}`}>
-              {columnList.map((_, columnIndex) => (
-                <td key={`table-tbody-column-${columnIndex}`}>{data[columnList[columnIndex].key]}</td>
-              ))}
+          {total > 0 ? (
+            dataList?.map((data: T, rowIndex) => (
+              <tr key={`table-tbody-row-${rowIndex}`} onClick={(event) => clickHandler({ event, data })}>
+                {columnList.map((_, columnIndex) => (
+                  <td key={`table-tbody-column-${columnIndex}`}>{data[columnList[columnIndex].key]}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={columnList.length} className="text-center">
+                데이터가 없습니다.
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
-      <Pagination total={total} page={page} setPage={setPage} />
+      {!!total && <Pagination total={total} page={page} setPage={setPage} />}
     </>
   );
 }
