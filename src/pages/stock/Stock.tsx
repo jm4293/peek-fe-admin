@@ -2,10 +2,13 @@ import { ChangeEvent, useRef } from 'react';
 import { useStockMutation } from '@/hooks/stock';
 import { Button } from '@/components/button';
 import { StockTable } from '@/pages/stock/_components/stockTable';
+import { useLoadingStore } from '@/store';
 
 export const Stock = () => {
   const uploadRef = useRef<HTMLInputElement | null>(null);
   const dataTypeRef = useRef<string>('');
+
+  const { startLoading, stopLoading } = useLoadingStore();
 
   const { uploadFileMutation, deleteStockMutation } = useStockMutation();
 
@@ -16,6 +19,8 @@ export const Stock = () => {
       const dataType = dataTypeRef.current;
 
       formData.append('file', file);
+
+      startLoading();
 
       uploadFileMutation.mutate({ formData, dataType });
     }
@@ -39,16 +44,11 @@ export const Stock = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex flex-col gap-10">
-        <div className="flex gap-5">
-          <input type="file" ref={uploadRef} style={{ display: 'none' }} onChange={uploadHandler} accept=".xlsx" />
-          <Button title="코스피" color="gray" onClick={() => uploadClickHandler({ dataType: 'kospi' })} />
-          <Button title="코스닥" color="gray" onClick={() => uploadClickHandler({ dataType: 'kosdaq' })} />
-        </div>
-
-        <div>
-          <Button title="종목 모두 삭제" color="gray" onClick={deleteClickHandler} />
-        </div>
+      <div className="grid grid-cols-8 gap-4">
+        <input type="file" ref={uploadRef} style={{ display: 'none' }} onChange={uploadHandler} accept=".xlsx" />
+        <Button title="코스피" color="gray" onClick={() => uploadClickHandler({ dataType: 'kospi' })} />
+        <Button title="코스닥" color="gray" onClick={() => uploadClickHandler({ dataType: 'kosdaq' })} />
+        <Button title="종목 모두 삭제" color="red" onClick={deleteClickHandler} className="col-start-8" />
       </div>
 
       <StockTable />
